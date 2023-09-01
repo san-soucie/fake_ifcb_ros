@@ -58,10 +58,12 @@ class Node:
                     "{}_{}.jpg".format(self.current_bin, target_id),
                 ),
                 stream=True,
-            ).raw
-            arr = np.asarray(bytearray(response.read()), dtype="uint8")
+            )
+            rospy.logdebug('Received response %s', response)
+            arr = np.asarray(bytearray(response.raw.read()), dtype="uint8")
             image = cv2.imdecode(arr, cv2.IMREAD_COLOR)
             msg = self.cvbridge.cv2_to_imgmsg(image, header=header)
+            rospy.logdebug('Publishing message...')
             self.roi_publisher.publish(msg)
 
     def gps_subscriber_callback(self, msg):
