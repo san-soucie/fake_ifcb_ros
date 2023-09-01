@@ -10,6 +10,9 @@ project(fake_ifcb)
 find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
+  python3-opencv
+  python3-pandas
+  cv_bridge
 )
 
 ## System dependencies are found with CMake's conventions
